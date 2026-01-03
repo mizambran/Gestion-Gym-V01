@@ -15,8 +15,8 @@ function App() {
     <Menu></Menu>
     <main>
       <Routes>
-    <Route path='/' element={<Home></Home>} ></Route>
-    <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
+    <Route path='/' element={<Home/>} ></Route>
+    <Route path='/dashboard' element={<Dashboard/>}></Route>
     </Routes>
     </main>
     <Footer></Footer>
