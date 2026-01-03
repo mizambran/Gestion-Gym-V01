@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from './components/pages/Home'
 import Menu from './components/shared/Menu'
 import Footer from './components/shared/Footer'
+import Dashboard from './components/pages/Dashboard'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     <main>
       <Routes>
     <Route path='/' element={<Home></Home>} ></Route>
+    <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
     </Routes>
     </main>
     <Footer></Footer>
