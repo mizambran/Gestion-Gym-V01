@@ -8,6 +8,7 @@ const ItemClientes = () => {
           <td>Mark</td>
           <td>Otto</td>
           <td>@</td>
+          <td> 👁️✏️❌</td>
         </tr>
     </>
   )
