@@ -3,7 +3,7 @@ import ItemClientes from './ItemClientes';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const ListaDeClientes = () => {
+const ListaDeClientes = ({clientes}) => {
   return (
     <div className='container my-5'>
         <div className='mb-4'>
@@ -31,7 +31,7 @@ const ListaDeClientes = () => {
         </tr>
       </thead>
       <tbody>
-        <ItemClientes />
+        {clientes.map((cliente) => <ItemClientes key={cliente.id} cliente={cliente}></ItemClientes>)}
       </tbody>
     </Table>
     </div>
