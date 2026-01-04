@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import {v4 as uuidv4} from 'uuid'
 import Swal from 'sweetalert2';
+/* Importo libreria date-fns */
+import {add, sub, format, parseISO} from 'date-fns'
 
 const RegistrarClientes = () => {
 
@@ -18,8 +20,35 @@ const RegistrarClientes = () => {
 
     const {register, handleSubmit, reset, formState:{errors}, watch ,setValue} = useForm()
 
-    /* Logica de fecha de vencimiento */
-    const [fechaInicio, setFechaInicio] = useState(null);
+    const fechaMinima = format(sub(new Date(), {months: 1}), 'yyyy-MM-dd')
+
+    const fechaInicioWatch = watch("fechaInicioCliente");
+    const planWatch = watch("planSeleccionado")
+
+    
+useEffect(() => {
+  if (fechaInicioWatch && planWatch) {
+    let mesesASumar = 0;
+    
+    // Definimos cuántos meses sumar según el plan
+    switch (planWatch) {
+      case "Mensual": mesesASumar = 1; break;
+      case "Trimestral": mesesASumar = 3; break;
+      case "Semestral": mesesASumar = 6; break;
+      case "Anual": mesesASumar = 12; break;
+      default: mesesASumar = 0;
+    }
+
+    if (mesesASumar > 0) {
+      // Calculamos la fecha
+      const fechaObj = parseISO(fechaInicioWatch);
+      const nuevaFecha = add(fechaObj, { months: mesesASumar });
+      
+      // INYECTAMOS el valor en el input de vencimiento
+      setValue("fechaVencimientoCliente", format(nuevaFecha, 'yyyy-MM-dd'));
+    }
+  }
+}, [fechaInicioWatch, planWatch, setValue]);
 
     /* Create */
     const crearCliente = (data) => {
@@ -91,24 +120,34 @@ const RegistrarClientes = () => {
 
       <Form.Group className="mb-3" >
         <Form.Label>Inicio</Form.Label>
-        <Form.Control type="date" {...register("fechaInicioCliente", {
-            required:"Tiene que ingresar la fecha de inscripcion"
+        <Form.Control type="date" min={fechaMinima} {...register("fechaInicioCliente", {
+            required:"Tiene que ingresar la fecha de inscripcion",
+            
         })} />
         <Form.Text className='text-danger'>{errors.fechaInicioCliente?.message} </Form.Text>
       </Form.Group>
       
       <Form.Group className="mb-3" >
-        <Form.Label>Vencimiento</Form.Label>
-        <Form.Select {...register("fechaVencimientoCliente", {
+        <Form.Label>Plan</Form.Label>
+        <Form.Select {...register("planSeleccionado", {
             required:"Tenes que seleccionar una opción"
         })}>
-            <option value="">Seleccionar</option>
+            <option value="">Seleccionar Plan</option>
             <option value="Mensual">Mensual</option>
             <option value="Trimestral">Trimestral</option>
             <option value="Semestral">Semestral</option>
             <option value="Anual">Anual</option>
         </Form.Select>
-        <Form.Text className='text-danger'>{errors.fechaVencimientoCliente?.message} </Form.Text>
+        <Form.Text className='text-danger'>{errors.planSeleccionado?.message} </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" >
+        <Form.Label>Vencimiento</Form.Label>
+        <Form.Control type="date" {...register("fechaVencimientoCliente", {
+            required:"Tiene que ingresar la fecha de inscripcion",
+            min:{fechaMinima}
+        })} />
+        <Form.Text className='text-danger'>{errors.fechaInicioCliente?.message} </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3">
