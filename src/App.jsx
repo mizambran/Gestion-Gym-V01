@@ -7,6 +7,7 @@ import Footer from './components/shared/Footer'
 import Dashboard from './components/pages/Dashboard'
 import ListaDeClientes from './components/pages/Login/ListaDeClientes'
 import Musica from './components/pages/Musica'
+import RegistrarClientes from './components/pages/Login/RegistrarClientes'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     <Route path='/musica' element={<Musica />} ></Route>
     <Route path='/dashboard' element={<Dashboard />}></Route>
     <Route path='/clientes' element={<ListaDeClientes />}></Route>
+    <Route path='/registrarClientes' element={<RegistrarClientes />}></Route>
     </Routes>
     </main>
     <Footer></Footer>
