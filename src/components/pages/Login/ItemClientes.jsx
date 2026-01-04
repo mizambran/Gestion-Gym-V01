@@ -1,13 +1,13 @@
 
 
-const ItemClientes = () => {
+const ItemClientes = ({cliente}) => {
   return (
     <>
       <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@</td>
+          <td>{cliente.id} </td>
+          <td>{cliente.nombreCliente} </td>
+          <td>{cliente.emailCliente} </td>
+          <td> {cliente.fechaVencimientoCliente} </td>
           <td> 👁️✏️❌</td>
         </tr>
     </>

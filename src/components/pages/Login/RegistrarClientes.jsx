@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid'
 import Swal from 'sweetalert2';
 /* Importo libreria date-fns */
-import {add, sub, format, parseISO} from 'date-fns'
+import {add, sub, format, parseISO, isValid} from 'date-fns'
+import ListaDeClientes from './ListaDeClientes';
 
 const RegistrarClientes = () => {
 
@@ -44,8 +45,10 @@ useEffect(() => {
       const fechaObj = parseISO(fechaInicioWatch);
       const nuevaFecha = add(fechaObj, { months: mesesASumar });
       
-      // INYECTAMOS el valor en el input de vencimiento
+      if(isValid(nuevaFecha)){
+        // INYECTAMOS el valor en el input de vencimiento
       setValue("fechaVencimientoCliente", format(nuevaFecha, 'yyyy-MM-dd'));
+      }
     }
   }
 }, [fechaInicioWatch, planWatch, setValue]);
@@ -54,12 +57,12 @@ useEffect(() => {
     const crearCliente = (data) => {
         const nuevoCliente = {
             id: uuidv4(),
-            nombre: data.nombreCliente,
-            email: data.emailCliente,
-            celular: data.celularCliente,
-            inicio: data.fechaInicioCliente,
-            vencimiento: data.fechaVencimientoCliente,
-            observacion: data.observacionCliente
+            nombreCliente: data.nombreCliente,
+            emailCliente: data.emailCliente,
+            celularCliente: data.celularCliente,
+            fechaInicioCliente: data.fechaInicioCliente,
+            fechaVencimientoCliente: data.fechaVencimientoCliente,
+            observacionCliente: data.observacionCliente
         };
 
         setClientes([...clientes, nuevoCliente])
@@ -143,11 +146,10 @@ useEffect(() => {
 
       <Form.Group className="mb-3" >
         <Form.Label>Vencimiento</Form.Label>
-        <Form.Control type="date" {...register("fechaVencimientoCliente", {
-            required:"Tiene que ingresar la fecha de inscripcion",
-            min:{fechaMinima}
+        <Form.Control type="date" readOnly {...register("fechaVencimientoCliente", {
+            
         })} />
-        <Form.Text className='text-danger'>{errors.fechaInicioCliente?.message} </Form.Text>
+        <Form.Text className='text-danger'>{errors.fechaVencimientoCliente?.message} </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -157,6 +159,7 @@ useEffect(() => {
       <Button variant='success' type='submit'>Guardar</Button>
       <Button variant='secondary' className='ms-2' as={Link} to={'/Clientes'}>Cancelar</Button>
     </Form>
+    <ListaDeClientes clientes={clientes}></ListaDeClientes>
     </div>
   )
 }
