@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import ItemClientes from './ItemClientes';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const ListaDeClientes = ({clientes}) => {
   return (

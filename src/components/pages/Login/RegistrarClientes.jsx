@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid'
 import Swal from 'sweetalert2';
 /* Importo libreria date-fns */
@@ -57,12 +57,12 @@ useEffect(() => {
     const crearCliente = (data) => {
         const nuevoCliente = {
             id: uuidv4(),
-            nombre: data.nombreCliente,
-            email: data.emailCliente,
-            celular: data.celularCliente,
-            inicio: data.fechaInicioCliente,
-            vencimiento: data.fechaVencimientoCliente,
-            observacion: data.observacionCliente
+            nombreCliente: data.nombreCliente,
+            emailCliente: data.emailCliente,
+            celularCliente: data.celularCliente,
+            fechaInicioCliente: data.fechaInicioCliente,
+            fechaVencimientoCliente: data.fechaVencimientoCliente,
+            observacionCliente: data.observacionCliente
         };
 
         setClientes([...clientes, nuevoCliente])

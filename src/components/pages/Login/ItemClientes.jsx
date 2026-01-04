@@ -5,9 +5,9 @@ const ItemClientes = ({cliente}) => {
     <>
       <tr>
           <td>{cliente.id} </td>
-          <td>{cliente.nombre} </td>
-          <td>{cliente.email} </td>
-          <td> {cliente.vencimiento} </td>
+          <td>{cliente.nombreCliente} </td>
+          <td>{cliente.emailCliente} </td>
+          <td> {cliente.fechaVencimientoCliente} </td>
           <td> 👁️✏️❌</td>
         </tr>
     </>
