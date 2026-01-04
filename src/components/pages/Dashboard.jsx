@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-
+import Form from 'react-bootstrap/Form';
 
 const Dashboard = () => {
   return (
@@ -10,19 +10,19 @@ const Dashboard = () => {
       <p>Resumen general de tu empresa</p>
       </div>
 
-      <div className="container-dashboard-filtroFecha">
-        <form action="" className='text-center d-flex justify-content-center'>
-          <div>
-            <label htmlFor="" className='me-2'>Desde</label>
-          <input type="date" />
-          </div>
-          <div>
-            <label htmlFor="" className='ms-5 me-2'>Hasta</label>
-          <input type="date" />
-          </div>
-        </form>
+      <div className="dashboardFiltroFechaClientes">
+        <Form className='d-flex justify-content-center gap-3'>
+      <Form.Group className="mb-3 text-center" >
+        <Form.Label>Desde</Form.Label>
+        <Form.Control type="date"  />
+      </Form.Group>
+      <Form.Group className="mb-3 text-center" >
+        <Form.Label>Hasta</Form.Label>
+        <Form.Control type="date"  />
+      </Form.Group>
+    </Form>
       </div>
-      <div className='d-flex flex-wrap justify-content-evenly col-12 col-md-12 mt-5 gap-5 text-center '>
+      <div className='d-flex flex-wrap justify-content-evenly col-12 col-md-12 mb-5 gap-5 text-center '>
         <Card border="primary" className='col-8 col-md-3' >
         <Card.Header className='bg-primary'>Clientes Totales</Card.Header>
         <Card.Body>
@@ -36,17 +36,17 @@ const Dashboard = () => {
       <Card border="success" className='col-8 col-md-3' >
         <Card.Header className='bg-success'>Clientes Activos</Card.Header>
         <Card.Body>
-          <Card.Title>320</Card.Title>
+          <Card.Title>200</Card.Title>
           <Card.Text>
             Vineron el último mes
           </Card.Text>
         </Card.Body>
       </Card>
 
-      <Card border="warning" className='col-8 col-md-3' >
+      <Card border="danger" className='col-8 col-md-3' >
         <Card.Header className='bg-danger'>Clientes Inactivos</Card.Header>
         <Card.Body>
-          <Card.Title>320</Card.Title>
+          <Card.Title>120</Card.Title>
           <Card.Text>
             No vienen hace mas de un mes
           </Card.Text>
@@ -54,7 +54,19 @@ const Dashboard = () => {
       </Card>
       </div>
 
-      <div className='d-flex flex-wrap justify-content-evenly col-12 col-md-12 my-5 gap-5 text-center'>
+      <div className="dashboardFiltroFechaCuotas mt-5">
+        <Form className='d-flex justify-content-center gap-3'>
+      <Form.Group className="mb-3 text-center" >
+        <Form.Label>Desde</Form.Label>
+        <Form.Control type="date"  />
+      </Form.Group>
+      <Form.Group className="mb-3 text-center" >
+        <Form.Label>Hasta</Form.Label>
+        <Form.Control type="date"  />
+      </Form.Group>
+    </Form>
+      </div>
+      <div className='d-flex flex-wrap justify-content-evenly col-12 col-md-12 mb-5 gap-5 text-center'>
         <Card border="primary" className='col-8 col-md-3' >
         <Card.Header className='bg-primary'>Cuotas Totales</Card.Header>
         <Card.Body>
@@ -75,7 +87,7 @@ const Dashboard = () => {
         </Card.Body>
       </Card>
 
-      <Card border="warning" className='col-8 col-md-3' >
+      <Card border="danger" className='col-8 col-md-3' >
         <Card.Header className='bg-danger'>Pendiente Cobrar</Card.Header>
         <Card.Body>
           <Card.Title>$40.000</Card.Title>
