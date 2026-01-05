@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
@@ -9,15 +9,9 @@ import Swal from 'sweetalert2';
 import {add, sub, format, parseISO, isValid} from 'date-fns'
 import ListaDeClientes from './ListaDeClientes';
 
-const RegistrarClientes = () => {
+const RegistrarClientes = ({clientes, setClientes}) => {
 
-    const clientesLocalStorage = JSON.parse(localStorage.getItem("clientesKey")) || [];
-
-    const [clientes, setClientes] = useState(clientesLocalStorage);
-
-    useEffect(() => {
-        localStorage.setItem("clientesKey", JSON.stringify(clientes))
-    }, [clientes])
+    
 
     const {register, handleSubmit, reset, formState:{errors}, watch ,setValue} = useForm()
 
@@ -159,7 +153,6 @@ useEffect(() => {
       <Button variant='success' type='submit'>Guardar</Button>
       <Button variant='secondary' className='ms-2' as={Link} to={'/Clientes'}>Cancelar</Button>
     </Form>
-    <ListaDeClientes clientes={clientes}></ListaDeClientes>
     </div>
   )
 }
